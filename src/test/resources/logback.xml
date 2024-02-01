@@ -1,0 +1,31 @@
+<!-- logback.xml -->
+<configuration>
+
+    <!-- Define the console appender -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %red(%msg) %n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Define the file appender -->
+    <appender name="File" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/application.log</file>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- Use %d to include the date in the log file name -->
+            <fileNamePattern>logs/application-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>1KB</maxFileSize>
+            <maxHistory>5</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <!-- Set the root logger level and add appenders -->
+    <root level="info">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="File" />
+    </root>
+
+</configuration>
