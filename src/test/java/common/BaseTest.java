@@ -4,6 +4,7 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 
 import common.actions.Actions;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -46,12 +47,14 @@ public class BaseTest {
     }
 
     public void setBrowserDriver(String browserName) {
-
         if (browserName.equalsIgnoreCase("chrome")) {
+            WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver();
         } else if (browserName.equalsIgnoreCase("firefox")) {
+            WebDriverManager.firefoxdriver().setup();
             driver = new FirefoxDriver();
         } else {
+            WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver();
         }
     }
