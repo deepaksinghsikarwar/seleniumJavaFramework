@@ -1,0 +1,43 @@
+pipeline {
+    agent any
+
+    tools {
+        maven 'Maven'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/sikarwardeepak/seleniumJavaFramework.git'
+                
+            }
+        }
+
+        stage('Build') {
+            steps {
+                script {
+                    // Build the Maven project
+                    bat 'mvn clean install'
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                // Run tests (replace with your testing commands)
+                bat 'mvn test'
+            }
+        }
+    }
+
+    post {
+        success {
+            // Actions to be performed if the build is successful
+            echo 'Build and tests succeeded!'
+        }
+        failure {
+            // Actions to be performed if the build fails
+            echo 'Build or tests failed!'
+        }
+    }
+}
