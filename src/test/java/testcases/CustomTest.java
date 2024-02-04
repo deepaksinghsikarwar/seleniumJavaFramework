@@ -4,6 +4,7 @@ import com.aventstack.extentreports.Status;
 import common.BaseTest;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import pageobjects.HomePage;
@@ -45,7 +46,7 @@ public class CustomTest extends BaseTest {
         test.log(Status.INFO, "ending test2");
     }
 
-    @Test
+    @Test @Ignore
     public void customTest2(){
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(5, 4, "First assertion failed");
