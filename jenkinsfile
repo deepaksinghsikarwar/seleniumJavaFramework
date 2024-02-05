@@ -28,6 +28,17 @@ pipeline {
                 bat 'mvn test'
             }
         }
+
+        stage('Archive Artifacts') {
+            steps {
+                script {
+                    // Archive the generated files
+                archiveArtifacts 'logs/**/*'
+                archiveArtifacts 'reports/**/*'
+                archiveArtifacts 'screenshots/**/*'
+                }
+            }
+        }
     }
 
     post {
