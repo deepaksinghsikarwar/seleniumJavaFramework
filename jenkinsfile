@@ -39,6 +39,7 @@ pipeline {
                     archiveArtifacts 'logs/**/*', 'reports/**/*', 'screenshots/**/*', "${commonArtifactsDir}/"
                 }
             }
+        }
     }
 
     post {
