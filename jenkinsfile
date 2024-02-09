@@ -33,7 +33,7 @@ pipeline {
             steps {
                 script {
                     def commonArtifactsDir = "${workspace}/common_artifacts"
-                    sh "mkdir -p ${commonArtifactsDir}"
+                    bat "mkdir \"${commonArtifactsDir}\""
                     
                     // Archive specific directories into the common artifacts location
                     archiveArtifacts 'logs/**/*', 'reports/**/*', 'screenshots/**/*', "${commonArtifactsDir}/"
