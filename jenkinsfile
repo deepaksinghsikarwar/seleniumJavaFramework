@@ -32,13 +32,13 @@ pipeline {
         stage('Archive Artifacts') {
             steps {
                 script {
-                    // Archive the generated files
-                archiveArtifacts 'logs/**/*'
-                archiveArtifacts 'reports/**/*'
-                archiveArtifacts 'screenshots/**/*'
+                    def commonArtifactsDir = "${currentBuild.getRawBuild().getWorkspace()}/common_artifacts"
+                    sh "mkdir -p ${commonArtifactsDir}"
+                    
+                    // Archive specific directories into the common artifacts location
+                    archiveArtifacts 'logs/**/*', 'reports/**/*', 'screenshots/**/*', "${commonArtifactsDir}/"
                 }
             }
-        }
     }
 
     post {
