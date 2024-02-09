@@ -32,7 +32,7 @@ pipeline {
         stage('Archive Artifacts') {
             steps {
                 script {
-                    def commonArtifactsDir = "${currentBuild.getRawBuild().getWorkspace()}/common_artifacts"
+                    def commonArtifactsDir = "${workspace}/common_artifacts"
                     sh "mkdir -p ${commonArtifactsDir}"
                     
                     // Archive specific directories into the common artifacts location
