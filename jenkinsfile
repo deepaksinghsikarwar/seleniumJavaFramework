@@ -36,15 +36,15 @@ pipeline {
                     // Check if the directory exists before attempting to create it
                     bat "if not exist \"${commonArtifactsDir}\" mkdir \"${commonArtifactsDir}\""
                     
-                    // Archive specific directories into the common artifacts location
-                    archiveArtifacts artifacts: 'logs/**/*, reports/**/*, screenshots/**/*', 
-                                     fingerprint: true, 
-                                     onlyIfSuccessful: true, 
-                                     allowEmptyArchive: true, 
-                                     excludes: '', 
-                                     latestOnly: false, 
-                                     useDefaultExcludes: true, 
-                                     'destination': "${commonArtifactsDir}/"
+                    // Change working directory to the common artifacts location
+                    dir(commonArtifactsDir) {
+                        // Archive specific directories into the common artifacts location
+                        archiveArtifacts artifacts: 'logs/**/*, reports/**/*, screenshots/**/*', 
+                                         fingerprint: true, 
+                                         onlyIfSuccessful: true, 
+                                         allowEmptyArchive: true, 
+                                         excludes: ''
+                    }
 
                     // Print the location of the archived artifacts
                     echo "Archived Artifacts Location: ${env.WORKSPACE}/common_artifacts"
