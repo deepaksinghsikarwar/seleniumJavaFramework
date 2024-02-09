@@ -37,7 +37,17 @@ pipeline {
                     bat "if not exist \"${commonArtifactsDir}\" mkdir \"${commonArtifactsDir}\""
                     
                     // Archive specific directories into the common artifacts location
-                    archiveArtifacts artifacts: 'logs/**/*, reports/**/*, screenshots/**/*', fingerprint: true, onlyIfSuccessful: true, allowEmptyArchive: true, excludes: '', latestOnly: false, useDefaultExcludes: true, 'prefix': "${commonArtifactsDir}/"
+                    archiveArtifacts artifacts: 'logs/**/*, reports/**/*, screenshots/**/*', 
+                                     fingerprint: true, 
+                                     onlyIfSuccessful: true, 
+                                     allowEmptyArchive: true, 
+                                     excludes: '', 
+                                     latestOnly: false, 
+                                     useDefaultExcludes: true, 
+                                     'prefix': "${commonArtifactsDir}/"
+
+                    // Print the location of the archived artifacts
+                    echo "Archived Artifacts Location: ${env.WORKSPACE}/common_artifacts"
                 }
             }
         }
