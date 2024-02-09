@@ -44,7 +44,7 @@ pipeline {
                                      excludes: '', 
                                      latestOnly: false, 
                                      useDefaultExcludes: true, 
-                                     'prefix': "${commonArtifactsDir}/"
+                                     'destination': "${commonArtifactsDir}/"
 
                     // Print the location of the archived artifacts
                     echo "Archived Artifacts Location: ${env.WORKSPACE}/common_artifacts"
