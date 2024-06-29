@@ -47,19 +47,8 @@ public class BaseTest {
     }
 
     public void setBrowserDriver(String browserName) {
-
-        String os = System.getProperty("os.name").toLowerCase();
-        String driverPath;
-
         if (browserName.equalsIgnoreCase("chrome")) {
-            if (os.contains("win")) {
-                driverPath = System.getProperty("user.dir") + "/browserDrivers/chromedriver.exe";
-            } else if (os.contains("nix") || os.contains("nux") || os.contains("mac")) {
-                driverPath = System.getProperty("user.dir") + "/browserDrivers/chromedriver";
-            } else {
-                throw new IllegalStateException("Unsupported operating system: " + os);
-            }
-            System.setProperty("webdriver.chrome.driver", driverPath);
+            WebDriverManager.firefoxdriver().setup();
             driver = new ChromeDriver();
         } else if (browserName.equalsIgnoreCase("firefox")) {
             WebDriverManager.firefoxdriver().setup();
