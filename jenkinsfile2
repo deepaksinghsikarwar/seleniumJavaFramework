@@ -1,0 +1,65 @@
+pipeline {
+  agent any
+
+  tools {
+    maven 'Maven'
+  }
+
+  stages {
+    stage('Checkout') {
+      steps {
+        git 'https://github.com/sikarwardeepak/seleniumJavaFramework.git'
+      }
+    }
+
+    stage('Build') {
+      steps {
+        script {
+          // Build the Maven project using sh for cross-platform compatibility
+          sh 'mvn clean install'
+        }
+      }
+    }
+
+    stage('Test') {
+      steps {
+        // Run tests using sh for cross-platform compatibility
+        sh 'mvn test'
+      }
+    }
+
+    stage('Archive Artifacts') {
+      steps {
+        script {
+          def commonArtifactsDir = "${workspace}/common_artifacts"
+          // Check if the directory exists before attempting to create it
+          sh "if not exist \"${commonArtifactsDir}\" mkdir \"${commonArtifactsDir}\""
+
+          // Change working directory using a platform-agnostic separator
+          dir(commonArtifactsDir) {
+            // Archive specific directories using forward slashes
+            archiveArtifacts artifacts: 'logs/**/*.*/, reports/**/*.*/, screenshots/**/*.*',
+                              fingerprint: true,
+                              onlyIfSuccessful: true,
+                              allowEmptyArchive: true,
+                              excludes: ''
+          }
+
+          // Print the location of the archived artifacts using forward slashes
+          echo "Archived Artifacts Location: ${env.WORKSPACE}/common_artifacts"
+        }
+      }
+    }
+  }
+
+  post {
+    success {
+      // Actions to be performed if the build is successful
+      echo 'Build and tests succeeded!'
+    }
+    failure {
+      // Actions to be performed if the build fails
+      echo 'Build or tests failed!'
+    }
+  }
+}
