@@ -48,7 +48,7 @@ public class BaseTest {
 
     public void setBrowserDriver(String browserName) {
         if (browserName.equalsIgnoreCase("chrome")) {
-            WebDriverManager.firefoxdriver().setup();
+            WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver();
         } else if (browserName.equalsIgnoreCase("firefox")) {
             WebDriverManager.firefoxdriver().setup();
