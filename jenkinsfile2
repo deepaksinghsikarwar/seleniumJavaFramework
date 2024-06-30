@@ -19,7 +19,7 @@ pipeline {
           // Build the Maven project using sh for cross-platform compatibility
           def userDir = System.getProperty('user.dir')
           def chromedriverPath = "${userDir}/browserDrivers/chromedriver"
-          if (file(chromedriverPath).exists()) {
+          if (fileExists(chromedriverPath)) {
                   sh "chmod +x ${chromedriverPath}"
                   echo "Set execute permission on ${chromedriverPath}"
                 } else {
