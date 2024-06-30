@@ -18,7 +18,7 @@ pipeline {
         script {
           // Build the Maven project using sh for cross-platform compatibility
           def userDir = System.getProperty('user.dir')
-          def chromedriverPath = "${userDir}/browserDrivers/chromedriver"
+          def chromedriverPath = "/var/jenkins_home/workspace/seleniumJava/browserDrivers/chromedriver"
           if (fileExists(chromedriverPath)) {
                   sh "chmod +x ${chromedriverPath}"
                   echo "Set execute permission on ${chromedriverPath}"
