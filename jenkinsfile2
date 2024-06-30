@@ -17,6 +17,14 @@ pipeline {
       steps {
         script {
           // Build the Maven project using sh for cross-platform compatibility
+          def userDir = System.getProperty('user.dir')
+          def chromedriverPath = "${userDir}/browserDrivers/chromedriver"
+          if (file(chromedriverPath).exists()) {
+                  sh "chmod +x ${chromedriverPath}"
+                  echo "Set execute permission on ${chromedriverPath}"
+                } else {
+                  echo "WARNING: Chromedriver not found at ${chromedriverPath}. Skipping permission setting."
+                }
           sh 'mvn clean install'
         }
       }
